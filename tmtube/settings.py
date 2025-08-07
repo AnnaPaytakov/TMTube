@@ -1,16 +1,17 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv 
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-!b8_86*hl(7xs2q*f0a^dmo!8e$9ai!msv#rni7ez067l31$w#"
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ["127.0.0.1", "rational-dragon-fancy.ngrok-free.app"]
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
-CSRF_TRUSTED_ORIGINS = ["https://rational-dragon-fancy.ngrok-free.app"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -94,5 +95,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
 
-# Упрощенный путь к FFmpeg (убедитесь, что FFmpeg добавлен в PATH)
+#* path to ffmpeg
 FFMPEG_PATH = "C://ffmpeg-master-latest-win64-gpl//bin//ffmpeg.exe"
