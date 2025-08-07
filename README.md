@@ -1,1 +1,1 @@
-# YouTube analog using ffmpeg ttol and HLS technology
+# YouTube analog using ffmpeg tool and HLS technology
