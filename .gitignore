@@ -7,3 +7,5 @@ migrations
 static
 templates
 media
+
+.python-version
