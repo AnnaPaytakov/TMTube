@@ -18,6 +18,7 @@ class Video(models.Model):
     def __str__(self):
         return self.title
 
+    #! boleklere bolyar
     @classmethod
     def convert_to_hls(cls, instance):
         if not instance.file:
