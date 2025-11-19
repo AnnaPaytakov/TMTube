@@ -1,5 +1,4 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-#! CBV gecmeli
-def register(request):
-    return render(request, "users/register.html")
+class RegisterView(TemplateView):
+    template_name = "users/register.html"
