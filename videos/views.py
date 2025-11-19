@@ -34,7 +34,7 @@ def upload_video(request):
         form = VideoForm()
     return render(request, "videos/upload.html", {"form": form})
 
-
+#! CBV gecmeli
 def videos(request):
     videos = Video.objects.all().order_by("-uploaded_at")
     context = {
