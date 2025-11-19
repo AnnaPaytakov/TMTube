@@ -4,7 +4,7 @@ from .forms import VideoForm
 from .models import Video
 from django.conf import settings
 
-
+#! CBV gecmeli
 def upload_video(request):
     if request.method == "POST":
         form = VideoForm(request.POST, request.FILES)
