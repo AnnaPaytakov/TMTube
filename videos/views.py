@@ -45,6 +45,7 @@ class VideosListView(ListView):
     context_object_name = "videos"
     ordering = ["-uploaded_at"]
 
+#* Single Video
 class VideoDetailView(DetailView):
     model = Video
     template_name = "videos/video.html"
