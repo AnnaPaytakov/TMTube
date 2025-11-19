@@ -11,7 +11,7 @@ from .models import Video
 class UploadVideoView(FormView):
     template_name = "videos/upload.html"
     form_class = VideoForm
-    success_url = reverse_lazy("videos")  # redirect на список
+    success_url = reverse_lazy("videos")
 
     def form_valid(self, form):
         try:
@@ -38,6 +38,7 @@ class UploadVideoView(FormView):
             form.add_error(None, str(e))
             return self.form_invalid(form)
         
+#* List Videos
 class VideosListView(ListView):
     model = Video
     template_name = "videos/videos.html"
