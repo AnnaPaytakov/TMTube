@@ -42,7 +42,7 @@ def videos(request):
     }
     return render(request, "videos/videos.html", context)
 
-
+#! CBV gecmeli
 def video(request, pk):
     video = Video.objects.get(id=pk)
     context = {
