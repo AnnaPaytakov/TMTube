@@ -57,7 +57,7 @@ class Video(models.Model):
                 cmd,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                encoding="utf-8",  # * encoding
+                encoding="utf-8",
                 text=True,
             )
 
