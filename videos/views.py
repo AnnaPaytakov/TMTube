@@ -1,51 +1,51 @@
 import os
-from django.shortcuts import render, redirect
+from django.conf import settings
+from django.views.generic import FormView, ListView, DetailView
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+
 from .forms import VideoForm
 from .models import Video
-from django.conf import settings
 
-#! CBV gecmeli
-def upload_video(request):
-    if request.method == "POST":
-        form = VideoForm(request.POST, request.FILES)
-        if form.is_valid():
-            try:
-                video = form.save()
 
-                print(f"Имя файла: {video.file.name}")
-                print(f"MEDIA_ROOT: {settings.MEDIA_ROOT}")
+class UploadVideoView(FormView):
+    template_name = "videos/upload.html"
+    form_class = VideoForm
+    success_url = reverse_lazy("videos")  # redirect на список
 
-                file_path = os.path.join(settings.MEDIA_ROOT, video.file.name)
+    def form_valid(self, form):
+        try:
+            video = form.save()
 
-                print(f"Сформированный путь: {file_path}")
-                print(f"Существование файла: {os.path.exists(file_path)}")
+            print(f"Имя файла: {video.file.name}")
+            print(f"MEDIA_ROOT: {settings.MEDIA_ROOT}")
 
-                if not os.path.exists(file_path):
-                    print(f"Файл не найден: {file_path}")
-                    form.add_error(None, "Файл не найден")
-                    return render(request, "videos/upload.html", {"form": form})
+            file_path = os.path.join(settings.MEDIA_ROOT, video.file.name)
 
-                Video.convert_to_hls(video)
-                return redirect("videos")
-            except Exception as e:
-                print(f"Полная ошибка: {e}")
-                form.add_error(None, str(e))
-    else:
-        form = VideoForm()
-    return render(request, "videos/upload.html", {"form": form})
+            print(f"Сформированный путь: {file_path}")
+            print(f"Существование файла: {os.path.exists(file_path)}")
 
-#! CBV gecmeli
-def videos(request):
-    videos = Video.objects.all().order_by("-uploaded_at")
-    context = {
-        "videos": videos,
-    }
-    return render(request, "videos/videos.html", context)
+            if not os.path.exists(file_path):
+                print(f"Файл не найден: {file_path}")
+                form.add_error(None, "Файл не найден")
+                return self.form_invalid(form)
 
-#! CBV gecmeli
-def video(request, pk):
-    video = Video.objects.get(id=pk)
-    context = {
-        "video": video,
-    }
-    return render(request, "videos/video.html", context)
+            Video.convert_to_hls(video)
+            return super().form_valid(form)
+
+        except Exception as e:
+            print(f"Полная ошибка: {e}")
+            form.add_error(None, str(e))
+            return self.form_invalid(form)
+        
+class VideosListView(ListView):
+    model = Video
+    template_name = "videos/videos.html"
+    context_object_name = "videos"
+    ordering = ["-uploaded_at"]
+
+class VideoDetailView(DetailView):
+    model = Video
+    template_name = "videos/video.html"
+    context_object_name = "video"
+    pk_url_kwarg = "pk"
