@@ -1,7 +1,6 @@
 import os
 from django.conf import settings
 from django.views.generic import FormView, ListView, DetailView
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
 from .forms import VideoForm
