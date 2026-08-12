@@ -42,6 +42,7 @@ HLS Conversion
              │
              ▼
         HLS Playback
+```text
 
 ## Future Improvements
 
@@ -49,3 +50,23 @@ HLS Conversion
 - Redis-based task queue for asynchronous video processing
 - Adaptive bitrate streaming with multiple video resolutions
 - Optimized video delivery and caching
+
+
+## Prerequisites
+
+Before running the project, make sure you have the following installed:
+
+- Python 3.10+
+- FFmpeg
+- UV
+
+### FFmpeg
+
+FFmpeg is required for video processing and HLS conversion.
+
+After installing FFmpeg, make sure it is available in your system `PATH` or configure its executable path in the Django settings.
+
+You can verify the installation with:
+
+```bash
+ffmpeg -version
