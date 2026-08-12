@@ -22,7 +22,7 @@ The project focuses on video uploading, server-side video processing with FFmpeg
 - HLS (HTTP Live Streaming)
 - UV
 
-## ⚙️ How It Works
+## How It Works
 
 When a video is uploaded, the application stores the original file and processes it with FFmpeg.
 
