@@ -24,14 +24,6 @@ The project focuses on video uploading, server-side video processing with FFmpeg
 
 ## How It Works
 
-When a video is uploaded, the application stores the original file and processes it with FFmpeg.
-
-The video is converted into HLS format, producing:
-
-- an `.m3u8` playlist
-- segmented video files
-
-The generated HLS playlist is then associated with the uploaded video and can be used for streaming.
 
 ```text
 Video Upload
@@ -51,3 +43,9 @@ HLS Conversion
              ▼
         HLS Playback
 
+## Future Improvements
+
+- Background video processing with Celery
+- Redis-based task queue for asynchronous video processing
+- Adaptive bitrate streaming with multiple video resolutions
+- Optimized video delivery and caching
