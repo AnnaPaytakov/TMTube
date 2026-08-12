@@ -42,7 +42,7 @@ HLS Conversion
              │
              ▼
         HLS Playback
-```text
+```
 
 ## Future Improvements
 
